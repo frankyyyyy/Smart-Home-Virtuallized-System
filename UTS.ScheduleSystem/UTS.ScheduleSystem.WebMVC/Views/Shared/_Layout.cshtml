@@ -1,0 +1,80 @@
+﻿@{ 
+    ViewBag.CurrentUser = System.Web.HttpContext.Current.User.Identity.Name;
+    ViewBag.CurrentUserRole = UTS.ScheduleSystem.DomainLogic.DataHandler.UserHandler.GetCurrentUserRole(ViewBag.CurrentUser);
+}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - 我的 ASP.NET 应用程序</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("ScheduleSystem 日程安排", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @switch (ViewBag.CurrentUserRole) {
+                            case "A":
+                    <li>@Html.ActionLink("Approve Rules 审批规则", "Index", "Approver")</li>
+                                break;
+                            case "E":
+                            <li>@Html.ActionLink("Edit Rules 编辑规则", "Index", "Editor")</li>
+                                break;
+                            case "DM":
+                    <li>@Html.ActionLink("Maintain Data 维护数据", "Index", "DataMaintainer")</li>
+                                break;
+                            case "AnE":
+                            <li>@Html.ActionLink("Approve Rules 审批规则", "Index", "Approver")</li>
+                            <li>@Html.ActionLink("Edit Rules 编辑规则", "Index", "Editor")</li>
+                                break;
+                            case "AnDM":
+                            <li>@Html.ActionLink("Approve Rules 审批规则", "Index", "Approver")</li>
+                            <li>@Html.ActionLink("Maintain Data 维护数据", "Index", "DataMaintainer")</li>
+                                break;
+                            case "EnDM":
+                            <li>@Html.ActionLink("Edit Rules 编辑规则", "Index", "Editor")</li>
+                            <li>@Html.ActionLink("Maintain Data 维护数据", "Index", "DataMaintainer")</li>
+                                break;
+                            case "AnEnDM":
+                            <li>@Html.ActionLink("Approve Rules 审批规则", "Index", "Approver")</li>
+                            <li>@Html.ActionLink("Edit Rules 编辑规则", "Index", "Editor")</li>
+                            <li>@Html.ActionLink("Maintain Data 维护数据", "Index", "DataMaintainer")</li>
+                                break;
+                            default:
+                            <li></li>
+                            break;
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - 1 App per Day</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,62 @@
+﻿@using UTS.ScheduleSystem.Data
+@model MealSchedule
+@{
+    ViewBag.Title = "Index";
+    var MealSchedules = (List<MealSchedule>)ViewBag.MealSchedules;
+}
+@*<!DOCTYPE html>
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Maintain Data</title>
+    </head>
+    <body>*@
+<h1>MealSchedules</h1>
+<table class="table table-striped table-bordered table-hover">
+    <tr>
+        <th>Id</th>
+        <th>Topic</th>
+        <th>Participants</th>
+        <th>Location</th>
+        <th>StartDate</th>
+        <th>EndDate</th>
+        <th>LastEditUserId</th>
+        <th></th>
+        <th>@Html.ActionLink("+ New MealSchedule", "Create")</th>
+    </tr>
+
+    @if (MealSchedules.Count > 0)
+    {
+
+
+        foreach (var item in (List<MealSchedule>)ViewBag.MealSchedules)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Topic</td>
+                <td>@item.Participants</td>
+                <td>@item.Location</td>
+                <td>@item.StartDate</td>
+                <td>@item.EndDate</td>
+                <td>@item.LastEditUserId</td>
+                <td>@Html.ActionLink("Edit", "Edit", new { id = item.Id })</td>
+                <td>@Html.ActionLink("Delete", "Delete", new { id = item.Id })</td>
+            </tr>
+        }
+
+    }
+</table>
+@*<h2>Add a personal contact</h2>
+    @using (Html.BeginForm())
+    {
+        <table>
+            <tr><td>@Html.LabelFor(x => x.Name, "Name")</td><td>@Html.TextBoxFor(x => x.Name)</td></tr>
+            <tr><td>@Html.LabelFor(x => x.Address, "Address")</td><td>@Html.TextBoxFor(x => x.Address)</td></tr>
+            <tr><td>@Html.LabelFor(x => x.PhoneNumber, "Phone Number")</td><td>@Html.TextBoxFor(x => x.PhoneNumber)</td></tr>
+        </table>
+        <input type="submit" value="Save" />
+    }*@
+@*</body>
+    </html>*@
+
+

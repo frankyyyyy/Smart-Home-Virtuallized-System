@@ -1,0 +1,92 @@
+﻿@using UTS.ScheduleSystem.Data
+@{
+    ViewBag.Title = "Editor";
+}
+@{
+
+    var ConversationalRules = (List<FixedConversationalRule>)ViewBag.FixedConversationalRule;
+}
+<h1>Pending / Rejected Rules</h1>
+<table class="table table-striped table-bordered table-hover">
+    <tr>
+        <th>Rule ID</th>
+        <th>Input</th>
+        <th>Output</th>
+        <th>Related user ID</th>
+        <th>@Html.ActionLink("Run Report", "Report")</th>
+        <th>@Html.ActionLink("+ New Rule", "Create")</th>
+    </tr>
+
+    <tr>
+        <td colspan="6"><b>Pending Conversational Rules</b></td>
+    </tr>
+    @foreach (var item in (List<ConversationalRule>)ViewBag.ConversationalRule)
+    {
+        if (item.Status == "Pending")
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Input</td>
+                <td>@item.Output</td>
+                <td>@item.RelatedUsersId</td>
+                <td>@Html.ActionLink("Edit", "Edit", new { id = item.Id })</td>
+                <td>@Html.ActionLink("Delete", "Delete", new { id = item.Id })</td>
+            </tr>
+        }
+
+    }
+    <tr>
+        <td colspan="6"><b>Pending Fixed Conversational Rules</b></td>
+    </tr>
+    @foreach (var item in (List<FixedConversationalRule>)ViewBag.FixedConversationalRule)
+    {
+        if (item.Status == "Pending")
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Input</td>
+                <td>@item.Output</td>
+                <td>@item.RelatedUsersId</td>
+                <td>@Html.ActionLink("Edit", "EditFixed", new { id = item.Id })</td>
+                <td>@Html.ActionLink("Delete", "DeleteFixed", new { id = item.Id })</td>
+            </tr>
+        }
+
+    }
+    <tr>
+        <td colspan="6"><b>Rejected Conversational Rules</b></td>
+    </tr>
+    @foreach (var item in (List<ConversationalRule>)ViewBag.ConversationalRule)
+    {
+        if (item.Status == "Rejected")
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Input</td>
+                <td>@item.Output</td>
+                <td>@item.RelatedUsersId</td>
+                <td></td>
+                <td></td>
+            </tr>
+        }
+
+    }
+    <tr>
+        <td colspan="6"><b>Rejected Fixed Conversational Rules</b></td>
+    </tr>
+    @foreach (var item in (List<FixedConversationalRule>)ViewBag.FixedConversationalRule)
+    {
+        if (item.Status == "Rejected")
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Input</td>
+                <td>@item.Output</td>
+                <td>@item.RelatedUsersId</td>
+                <td></td>
+                <td></td>
+            </tr>
+        }
+
+    }
+</table>
